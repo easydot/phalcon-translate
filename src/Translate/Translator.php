@@ -105,10 +105,9 @@ class Translator
 
                 $content = include $file;
                 $this->required[$file] = true;
-            }
-            else {
+            } else {
                 // set default path by default language
-                $file = $this->path.$this->default.DIRECTORY_SEPARATOR.$signature.'.php';
+                $file = $this->path . $this->default . DIRECTORY_SEPARATOR . $signature . '.php';
                 if (file_exists($file) === true) {
 
                     $content = include $file;
@@ -120,17 +119,16 @@ class Translator
             $this->adapter = new TranslateAdapterArray(['content' => [
                 $signature => (isset($content)) ? $content : false
             ]]);
+
+
+            $reflection = new \ReflectionClass($this->adapter);
+            $property = $reflection->getProperty('_translate');
+            $property->setAccessible(true);
+
+            // setup signature
+            $this->signature[$signature] = $property->getValue($this->adapter)[$signature];
         }
 
-        // $this->adapter->offsetGet() was thrown error with Phalcon 2.0 (??)
-        $reflection = new \ReflectionClass($this->adapter);
-        $property = $reflection->getProperty('_translate');
-        $property->setAccessible(true);
-        //$this->signature = $this->adapter->offsetGet($signature);
-
-        // setup signature
-        $this->signature[$signature] = $property->getValue($this->adapter)[$signature];
-//        echo '<pre>' . print_r($this->signature, true) . '</pre>';
         return $this;
     }
 
@@ -156,7 +154,6 @@ class Translator
     public function translate($signature, $string) {
 
         // get selected signature
-
         if(empty($this->signature) === false) {
             if (is_array($this->signature[$signature])) {
                 if (array_key_exists($string, $this->signature[$signature]) === false) {
