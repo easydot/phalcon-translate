@@ -1,8 +1,38 @@
 {
   "name": "multidanze/phalcon-translate",
-  "description": "Easy trasnlate PhalconPHP",
-  "require": {
-    "php": ">=5.4",
-    "another-vendor/package": "1.*"
+  "description": "Phalcon Translate Module.",
+  "type": "library",
+  "keywords" : [
+    "phalcon",
+    "phalcon translate",
+    "phalcon partial translate"
+  ],
+  "support": {
+    "issues": "https://github.com/multidanze/phalcon-translate/issues"
+  },
+  "minimum-stability": "stable",
+  "homepage" : "https://github.com/multidanze/phalcon-translate",
+  "license" : "MIT",
+  "authors" : [{
+    "name": "multidanze,
+    "email": "multidanze@gmail.com",
+    "homepage": "http://easydot.gr",
+    "role": "Developer"
+  }],
+
+  "require" : {
+    "php" : ">=5.4.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Translate\\": "src/Translate"
+    }
+  },
+
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.*-dev"
+    }
   }
 }
