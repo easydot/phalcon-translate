@@ -1,0 +1,8 @@
+{
+  "name": "multidanze/phalcon-translate",
+  "description": "Easy trasnlate PhalconPHP",
+  "require": {
+    "php": ">=5.4",
+    "another-vendor/package": "1.*"
+  }
+}
