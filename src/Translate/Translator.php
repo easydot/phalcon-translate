@@ -157,7 +157,7 @@ class Translator
      */
     public function translate($signature, $string)
     {
-        if (!count($this->signature[$signature])) {
+        if (!isset($this->signature[$signature])) {
             $this->assign($signature);
         }
 
