@@ -69,7 +69,8 @@ class Translator
      * @param string $path
      * @return Translator
      */
-    public function setTranslatePath($path) {
+    public function setTranslatePath($path)
+    {
         $this->path = $path;
 
         return $this;
@@ -81,7 +82,8 @@ class Translator
      * @param string $language
      * @return Translator
      */
-    public function setLanguage($language) {
+    public function setLanguage($language)
+    {
         $this->language = $language;
 
         return $this;
@@ -94,7 +96,8 @@ class Translator
      * @throws Exception
      * @return Translator
      */
-    public function assign($signature) {
+    public function assign($signature)
+    {
 
         $file = $this->path.$this->language.DIRECTORY_SEPARATOR.$signature.'.php';
 
@@ -138,7 +141,8 @@ class Translator
      * @param string $default
      * @return Translator
      */
-    public function setDefault($default) {
+    public function setDefault($default)
+    {
         $this->default = $default;
 
         return $this;
@@ -151,7 +155,11 @@ class Translator
      * @throws Exception
      * @return string
      */
-    public function translate($signature, $string) {
+    public function translate($signature, $string)
+    {
+        if (!count($this->signature[$signature])) {
+            $this->assign($signature);
+        }
 
         // get selected signature
         if(empty($this->signature) === false) {
