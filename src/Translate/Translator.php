@@ -155,7 +155,7 @@ class Translator
      * @throws Exception
      * @return string
      */
-    public function translate($signature, $string)
+    public function translate($signature, $string, $placeholders = [])
     {
         if (!isset($this->signature[$signature])) {
             $this->assign($signature);
@@ -168,7 +168,11 @@ class Translator
                     return $string;
                 }
             }
-            return $this->signature[$signature][$string];
+            $translation = $this->signature[$signature][$string];
+            foreach ($placeholders as $key => $value) {
+                $translation = str_replace('%'. $key .'%', $value, $translation);
+            }
+            return $translation;
         }
         else {
             throw new Exception('Could not find translate signature');
